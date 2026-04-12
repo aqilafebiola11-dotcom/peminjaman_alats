@@ -19,14 +19,14 @@ class LogAktivitas extends Model
     protected $fillable = [
         'id_user',
         'aktivitas',
-        'tanggal_aktifitas',
+        'waktu',
     ];
 
 
     protected function casts(): array
     {
         return [
-            'tanggal_aktifitas' => 'datetime',
+            'waktu' => 'datetime',
         ];
     }
 
@@ -36,8 +36,8 @@ class LogAktivitas extends Model
         parent::boot();
 
         static::creating(function ($model) {
-            if (!$model->tanggal_aktifitas) {
-                $model->tanggal_aktifitas = now();
+            if (!$model->waktu) {
+                $model->waktu = now();
             }
         });
     }
@@ -54,7 +54,7 @@ class LogAktivitas extends Model
         return static::create([
             'id_user' => $userId ?? auth()->id(),
             'aktivitas' => $aktivitas,
-            'tanggal_aktifitas' => now(),
+            'waktu' => now(),
         ]);
     }
 }

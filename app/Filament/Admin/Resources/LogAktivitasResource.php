@@ -43,7 +43,7 @@ class LogAktivitasResource extends Resource
                             ->label('Aktivitas')
                             ->disabled()
                             ->columnSpanFull(),
-                        DateTimePicker::make('tanggal_aktifitas')
+                        DateTimePicker::make('waktu')
                             ->label('Waktu')
                             ->disabled(),
                     ]),
@@ -61,7 +61,7 @@ class LogAktivitasResource extends Resource
                     ->label('User')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('user.user_role')
+                Tables\Columns\TextColumn::make('user.role')
                     ->label('Role')
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {
@@ -75,7 +75,7 @@ class LogAktivitasResource extends Resource
                     ->limit(50)
                     ->wrap()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('tanggal_aktifitas')
+                Tables\Columns\TextColumn::make('waktu')
                     ->label('Waktu')
                     ->dateTime('d M Y H:i:s')
                     ->sortable(),
@@ -91,7 +91,7 @@ class LogAktivitasResource extends Resource
             ->bulkActions([
 
             ])
-            ->defaultSort('tanggal_aktifitas', 'desc');
+            ->defaultSort('waktu', 'desc');
     }
 
     public static function getRelations(): array

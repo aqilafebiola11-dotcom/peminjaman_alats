@@ -11,10 +11,11 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('alat', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('id_kategori')->constrained('kategori')->cascadeOnDelete();
+            $table->id('id_alat');
+            $table->unsignedBigInteger('id_kategori');
+            $table->foreign('id_kategori')->references('id_kategori')->on('kategori')->cascadeOnDelete();
             $table->string('nama_alat');
-            $table->integer('jumlah');
+            $table->integer('stok');
             $table->string('kondisi');
             $table->enum('status', ['tersedia', 'dipinjam'])->default('tersedia');
             $table->timestamp('created_at')->useCurrent();

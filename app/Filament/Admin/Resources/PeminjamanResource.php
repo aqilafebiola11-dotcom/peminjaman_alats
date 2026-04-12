@@ -78,7 +78,7 @@ class PeminjamanResource extends Resource
                         Select::make('id_user')
                             ->label('Peminjam')
                             ->options(function () {
-                                return User::where('user_role', 'peminjam')
+                                return User::where('role', 'peminjam')
                                     ->orderBy('email')
                                     ->get(['id_user', 'email'])
                                     ->mapWithKeys(function (User $peminjam) {
@@ -294,7 +294,7 @@ class PeminjamanResource extends Resource
                     ]),
                 Tables\Filters\SelectFilter::make('id_user')
                     ->label('Peminjam')
-                    ->options(User::where('user_role', 'peminjam')->pluck('email', 'id_user')),
+                    ->options(User::where('role', 'peminjam')->pluck('email', 'id_user')),
                 Tables\Filters\Filter::make('tanggal_kembali')
                     ->form([
                         DatePicker::make('from')

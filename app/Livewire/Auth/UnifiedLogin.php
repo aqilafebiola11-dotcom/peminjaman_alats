@@ -39,7 +39,7 @@ class UnifiedLogin extends Component
 
     protected function redirectBasedOnRole($user)
     {
-        $role = $user->user_role ?? $user->role ?? 'peminjam';
+        $role = $user->role ?? 'peminjam';
         return redirect()->to('/' . strtolower($role) . '/dashboard');
     }
 

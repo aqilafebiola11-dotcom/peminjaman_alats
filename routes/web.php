@@ -27,7 +27,7 @@ Route::post('/login', function () {
     request()->session()->regenerate();
 
     $user = Auth::user();
-    $role = $user->user_role ?? $user->role ?? 'peminjam';
+    $role = $user->role ?? 'peminjam';
     return redirect()->to('/' . strtolower($role) . '/dashboard');
 })->name('login.submit');
 

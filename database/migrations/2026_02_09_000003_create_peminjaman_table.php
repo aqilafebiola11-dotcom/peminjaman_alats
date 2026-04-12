@@ -11,12 +11,14 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('peminjaman', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('id_user')->constrained('users')->cascadeOnDelete();
+            $table->id('id_peminjaman');
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id_user')->on('users')->cascadeOnDelete();
             $table->date('tanggal_pinjam');
-            $table->date('tanggal_kembali_rencana');
+            $table->date('tanggal_kembali');
             $table->enum('status', ['menunggu', 'disetujui', 'ditolak', 'dikembalikan'])->default('menunggu');
-            $table->foreignId('disetujui_oleh')->nullable()->constrained('users')->nullOnDelete();
+            $table->unsignedBigInteger('disetujui_oleh')->nullable();
+            $table->foreign('disetujui_oleh')->references('id_user')->on('users')->nullOnDelete();
             $table->timestamp('created_at')->useCurrent();
         });
     }

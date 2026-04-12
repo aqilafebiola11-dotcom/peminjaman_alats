@@ -12,8 +12,10 @@ return new class extends Migration {
     {
         Schema::create('detail_peminjaman', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_peminjaman')->constrained('peminjaman')->cascadeOnDelete();
-            $table->foreignId('id_alat')->constrained('alat')->cascadeOnDelete();
+            $table->unsignedBigInteger('id_peminjaman');
+            $table->foreign('id_peminjaman')->references('id_peminjaman')->on('peminjaman')->cascadeOnDelete();
+            $table->unsignedBigInteger('id_alat');
+            $table->foreign('id_alat')->references('id_alat')->on('alat')->cascadeOnDelete();
             $table->integer('jumlah_pinjam');
         });
     }

@@ -106,7 +106,7 @@
 
 .fi-sidebar-item.fi-active > .fi-sidebar-item-btn,
 .fi-topbar-item.fi-active > .fi-topbar-item-btn {
-    color: #f4fffc;
+    color: #f4fffc !important;
     background: linear-gradient(120deg, var(--app-primary), var(--app-primary-strong));
     box-shadow: 0 10px 18px -14px rgba(14, 122, 111, 0.85);
 }
@@ -118,8 +118,10 @@
 }
 
 .fi-sidebar-item.fi-active > .fi-sidebar-item-btn .fi-sidebar-item-icon,
-.fi-topbar-item.fi-active > .fi-topbar-item-btn .fi-topbar-item-icon {
-    color: #f4fffc;
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn .fi-sidebar-item-label,
+.fi-topbar-item.fi-active > .fi-topbar-item-btn .fi-topbar-item-icon,
+.fi-topbar-item.fi-active > .fi-topbar-item-btn .fi-topbar-item-label {
+    color: #f4fffc !important;
 }
 
 .fi-section,

@@ -11,8 +11,9 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('log_aktivitas', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('id_user')->constrained('users')->cascadeOnDelete();
+            $table->id('id_log');
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id_user')->on('users')->cascadeOnDelete();
             $table->text('aktivitas');
             $table->timestamp('waktu')->useCurrent();
         });

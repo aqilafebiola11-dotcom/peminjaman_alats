@@ -19,7 +19,7 @@ class PengembalianObserver
         LogAktivitas::create([
             'id_user' => $userId,
             'aktivitas' => "Mencatat pengembalian untuk peminjaman #{$pengembalian->id_peminjaman}{$denda}",
-            'tanggal_aktifitas' => now(),
+            'waktu' => now(),
         ]);
     }
 
@@ -32,7 +32,7 @@ class PengembalianObserver
             LogAktivitas::create([
                 'id_user' => $userId,
                 'aktivitas' => "Mengupdate data pengembalian #{$pengembalian->id_pengembalian}",
-                'tanggal_aktifitas' => now(),
+                'waktu' => now(),
             ]);
         }
     }

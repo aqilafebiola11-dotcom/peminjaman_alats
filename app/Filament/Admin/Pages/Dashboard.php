@@ -27,7 +27,7 @@ class Dashboard extends BaseDashboard
 
         $greeting = 'Selamat Datang, ' . $user->getFilamentName();
 
-        $role = $user->user_role ?? $user->role;
+        $role = $user->role;
 
         return match ($role) {
             'admin' => $greeting . ' (Administrator)',
@@ -46,7 +46,7 @@ class Dashboard extends BaseDashboard
             return null;
         }
 
-        $role = $user->user_role ?? $user->role;
+        $role = $user->role;
 
         return match ($role) {
             'admin' => 'Anda memiliki akses penuh ke semua fitur sistem.',

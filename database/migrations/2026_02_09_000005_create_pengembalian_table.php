@@ -11,11 +11,12 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('pengembalian', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('id_peminjaman')->constrained('peminjaman')->cascadeOnDelete();
+            $table->id('id_pengembalian');
+            $table->unsignedBigInteger('id_peminjaman');
+            $table->foreign('id_peminjaman')->references('id_peminjaman')->on('peminjaman')->cascadeOnDelete();
             $table->date('tanggal_kembali');
             $table->integer('denda')->default(0);
-            $table->string('kondisi_kembali');
+            $table->string('kondisi_kembali')->nullable();
         });
     }
 

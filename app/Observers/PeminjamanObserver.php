@@ -15,7 +15,7 @@ class PeminjamanObserver
         LogAktivitas::create([
             'id_user' => $userId,
             'aktivitas' => "Membuat peminjaman baru #{$peminjaman->id_peminjaman}",
-            'tanggal_aktifitas' => now(),
+            'waktu' => now(),
         ]);
     }
 
@@ -39,7 +39,7 @@ class PeminjamanObserver
         LogAktivitas::create([
             'id_user' => $userId,
             'aktivitas' => $message,
-            'tanggal_aktifitas' => now(),
+            'waktu' => now(),
         ]);
     }
 
@@ -52,7 +52,7 @@ class PeminjamanObserver
             LogAktivitas::create([
                 'id_user' => $userId,
                 'aktivitas' => "Menghapus peminjaman #{$peminjaman->id_peminjaman}",
-                'tanggal_aktifitas' => now(),
+                'waktu' => now(),
             ]);
         }
     }

@@ -45,13 +45,14 @@ class UserResource extends Resource
                             ->maxLength(255)
                             ->prefixIcon('heroicon-o-user')
                             ->placeholder('Nama Lengkap User'),
-                        TextInput::make('username')
-                            ->label('Username')
+                        TextInput::make('email')
+                            ->label('Email')
                             ->required()
+                            ->email()
                             ->unique(ignoreRecord: true)
                             ->maxLength(255)
                             ->prefixIcon('heroicon-o-at-symbol')
-                            ->placeholder('username_unik'),
+                            ->placeholder('user@email.com'),
                         Select::make('role')
                             ->label('Peran (Role)')
                             ->options([
@@ -91,8 +92,8 @@ class UserResource extends Resource
                                     ->weight('bold')
                                     ->size(TextSize::Large)
                                     ->icon('heroicon-o-user'),
-                                TextEntry::make('username')
-                                    ->label('Username')
+                                TextEntry::make('email')
+                                    ->label('Email')
                                     ->icon('heroicon-o-at-symbol')
                                     ->copyable(),
                                 TextEntry::make('role')
@@ -121,7 +122,7 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('nama')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('username')
+                Tables\Columns\TextColumn::make('email')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('role')

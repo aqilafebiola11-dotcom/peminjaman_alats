@@ -23,8 +23,7 @@ class User extends Authenticatable implements FilamentUser, HasName
         'nama',
         'email',
         'password',
-        'user_role',
-        'kelas',
+        'role',
     ];
 
 
@@ -50,31 +49,31 @@ class User extends Authenticatable implements FilamentUser, HasName
 
     public function canAccessPanel(Panel $panel): bool
     {
-        $role = $this->role ?? $this->user_role ?? '';
+        $role = $this->role ?? '';
         return strtolower($role) === strtolower($panel->getId());
     }
 
 
     public function getRole(): string
     {
-        return $this->user_role ?? 'peminjam';
+        return $this->role ?? 'peminjam';
     }
 
     public function isAdmin(): bool
     {
-        return $this->user_role === 'admin';
+        return $this->role === 'admin';
     }
 
 
     public function isPetugas(): bool
     {
-        return $this->user_role === 'petugas';
+        return $this->role === 'petugas';
     }
 
 
     public function isPeminjam(): bool
     {
-        return $this->user_role === 'peminjam';
+        return $this->role === 'peminjam';
     }
 
 
