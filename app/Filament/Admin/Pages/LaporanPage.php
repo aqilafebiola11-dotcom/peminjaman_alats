@@ -21,6 +21,15 @@ class LaporanPage extends Page
 
     protected static ?int $navigationSort = 10;
 
+    protected string $view = 'filament.pages.laporan-page';
+
+    // Livewire properties for preview state
+    public ?string $previewUrl = null;
+
+    public ?string $downloadUrl = null;
+
+    public ?string $previewTitle = null;
+
     public static function canAccess(): bool
     {
         /** @var User|null $user */
@@ -39,10 +48,9 @@ class LaporanPage extends Page
                 ->form($this->getDateRangeForm())
                 ->modalHeading('Cetak Laporan Alat')
                 ->modalDescription('Pilih periode tanggal (opsional). Kosongkan untuk mencetak semua data.')
+                ->modalSubmitActionLabel('Tampilkan Preview')
                 ->action(function (array $data): void {
-                    $url = $this->buildReportUrl('alat', $data);
-
-                    $this->js("window.open('{$url}', '_blank')");
+                    $this->showPreview('alat', $data, 'Laporan Alat');
                 }),
 
             Action::make('cetakLaporanPeminjaman')
@@ -52,10 +60,9 @@ class LaporanPage extends Page
                 ->form($this->getDateRangeForm())
                 ->modalHeading('Cetak Laporan Peminjaman')
                 ->modalDescription('Filter berdasarkan tanggal pinjam (opsional).')
+                ->modalSubmitActionLabel('Tampilkan Preview')
                 ->action(function (array $data): void {
-                    $url = $this->buildReportUrl('peminjaman', $data);
-
-                    $this->js("window.open('{$url}', '_blank')");
+                    $this->showPreview('peminjaman', $data, 'Laporan Peminjaman');
                 }),
 
             Action::make('cetakLaporanPengembalian')
@@ -65,12 +72,25 @@ class LaporanPage extends Page
                 ->form($this->getDateRangeForm())
                 ->modalHeading('Cetak Laporan Pengembalian')
                 ->modalDescription('Filter berdasarkan tanggal kembali (opsional).')
+                ->modalSubmitActionLabel('Tampilkan Preview')
                 ->action(function (array $data): void {
-                    $url = $this->buildReportUrl('pengembalian', $data);
-
-                    $this->js("window.open('{$url}', '_blank')");
+                    $this->showPreview('pengembalian', $data, 'Laporan Pengembalian');
                 }),
         ];
+    }
+
+    public function showPreview(string $type, array $data, string $title): void
+    {
+        $this->previewUrl = $this->buildReportUrl('reports.preview', $type, $data);
+        $this->downloadUrl = $this->buildReportUrl('reports.pdf', $type, $data);
+        $this->previewTitle = $title;
+    }
+
+    public function closePreview(): void
+    {
+        $this->previewUrl = null;
+        $this->downloadUrl = null;
+        $this->previewTitle = null;
     }
 
     protected function getDateRangeForm(): array
@@ -88,7 +108,7 @@ class LaporanPage extends Page
         ];
     }
 
-    protected function buildReportUrl(string $type, array $data): string
+    protected function buildReportUrl(string $routeName, string $type, array $data): string
     {
         $params = ['type' => $type];
 
@@ -100,6 +120,6 @@ class LaporanPage extends Page
             $params['until'] = $data['until'];
         }
 
-        return route('reports.pdf', $params);
+        return route($routeName, $params);
     }
 }

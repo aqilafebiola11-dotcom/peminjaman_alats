@@ -34,4 +34,6 @@ Route::post('/login', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/laporan/pdf/{type}', [ReportController::class, 'download'])
         ->name('reports.pdf');
+    Route::get('/laporan/preview/{type}', [ReportController::class, 'stream'])
+        ->name('reports.preview');
 });
